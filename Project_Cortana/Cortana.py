@@ -128,26 +128,6 @@ async def disconnect(ctx):
         if channel.guild == ctx.message.guild:
             return await channel.disconnect()
 
-
-@client.event
-async def on_member_join(member):
-    channel = general
-    for voice.channel in client.guilds:
-        if voice.channel.name == 'General':
-            await channel.send(member.mention + ' Σήμερα 9 Μάκρη')
-
-
-"""
-@client.event
-async def on_message(message):
-    if message.author == 'Rythm#3722':
-        await message.channel.purge(limit=1)
-    for channel in client.voice_clients:
-        if channel.guild == message.guild:
-            bot = 'Rythm#3722'
-            await bot.edit(voice_channel=None)
-"""
-
 # Load all cogs
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):

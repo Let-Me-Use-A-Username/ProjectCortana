@@ -8,7 +8,6 @@ from discord.ext import commands
 
 
 class Functionality(commands.Cog):
-    ''' Functionality module. Contains the: ping | credits | clear commands. '''
     
     def __init__(self, client):
         self.client = client
@@ -23,23 +22,20 @@ class Functionality(commands.Cog):
     # Command ping
     @commands.command()
     async def ping(self, ctx):
-        ''': Displays Latency. Needs no arguments.'''
         await ctx.send(f'Latency: {round(self.client.latency * 1000)}ms')
 
     # Command clear (clear a fixed or given amount of messages)
     @commands.command()
     async def clear(self, ctx, amount=10):
-        ''': Clears a default (=10) or given amount of messages. '''
         await ctx.channel.purge(limit=amount)
 
     # Command Credits
     @commands.command(name='Credits')
     async def credits(self, ctx):
-        ''': Displays creation credits. '''
         await ctx.send('I was created by Our Lord and Savior Sir Alexander Paul McLean')
 
     @commands.command()
-    async def search(self, ctx, member: discord.Member=None, scope=100):
+    async def search(self, ctx, member: discord.Member = None):
         messages = await ctx.channel.history().flatten()
         for message in messages:
             if member and message.author == member:
@@ -49,12 +45,10 @@ class Functionality(commands.Cog):
             return
 
     @commands.command()
-    async def admin(self, ctx):
+    async def admin(self, member: discord.Member):
         role = discord.utils.get(member.guild.roles, name="Father_of_all")
         await member.add_roles(role)
     
 
 def setup(client):
     client.add_cog(Functionality(client))
-
-
